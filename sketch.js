@@ -1,9 +1,7 @@
 // Project Title Street fighter
-// Your Name(s)
-// Date
+// Your Name(s) Jayson, Nathan
+// Date 9/19/25
 //
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
 
 function setup() {
   //This function get run once at the start of the program

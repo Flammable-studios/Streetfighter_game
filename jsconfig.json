@@ -2,6 +2,6 @@
   "include": [
     "*.js",
     "libraries/*.js",
-    "c:\\Users\\nathan.hall1\\.vscode\\extensions\\wmcicompsci.cs30-p5-1.9.0\\p5types\\global.d.ts"
+    "c:\\Users\\jayson\\.vscode\\extensions\\wmcicompsci.cs30-p5-1.9.2\\p5types\\global.d.ts"
   ]
 }

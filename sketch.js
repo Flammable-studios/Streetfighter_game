@@ -15,8 +15,8 @@ function setup() {
 
   //Set the number of frames per second
   frameRate(15);
-} //test
+}
 
 function draw() {
   background(220);
-}//test
+}

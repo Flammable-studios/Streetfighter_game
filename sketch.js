@@ -12,7 +12,7 @@ function setup() {
   rectMode(CENTER);
 
   //Set the number of frames per second
-  frameRate(15);
+  frameRate(30);
 }
 
 function draw() {

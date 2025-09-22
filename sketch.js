@@ -3,10 +3,10 @@
 // Date 9/19/25
 
 //Variables
-//let p1X;
-//let p1Y;
-//let p2X;
-//let p2Y;
+let p1X = 50;
+let p1Y;
+let p2X;
+let p2Y;
 let p1Health = 100;
 let p2Health = 100;
 let backDrop;
@@ -29,7 +29,7 @@ function setup() {
 function draw() {
   background(220);
   //backDrop(100, 200);
-  
+
   //Health Bars
   fill('black');
   rect(30, 50, 200, 30);
@@ -46,5 +46,11 @@ function draw() {
   textSize(50);
   text("HP", 270, 70)
 
-  //player
+  //player movement
+  if (ButtonDown(68)) {
+    p1X += 5;
+  }
+  if (ButtonDown(65)) {
+    p1X -= 5;
+  }
 }

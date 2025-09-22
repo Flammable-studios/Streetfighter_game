@@ -9,10 +9,11 @@ let eX;
 let eY;
 let Score = 0;
 let health = 100;
+let 
 
 function setup() {
   //This function get run once at the start of the program
-  createCanvas(600, 400);
+  createCanvas(1800, 900);
   background(240);
   // ellipseMode(CORNER);
   ellipseMode(CENTER);

@@ -53,7 +53,7 @@ function draw() {
   if(keyIsDown(65)){
     p1X -= 5;
   }
-   if(KeyIsDown(37)) {
+  if(KeyIsDown(37)) {
    p2X += 5;
   }
   if(KeyIsDown(39)) {

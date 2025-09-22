@@ -29,15 +29,22 @@ function setup() {
 function draw() {
   background(220);
   //backDrop(100, 200);
+  
+  //Health Bars
   fill('black');
   rect(30, 50, 200, 30);
   rect(370, 50, 200, 30);
   fill('red');
   stroke('black');
-  rect(30, 50, p1Health * 2, 30);
-  rect(570, 50, p2Health * -2, 30);
+  //health bars
+  rect(230, 50, p1Health * -2, 30);
+  rect(370, 50, p2Health * 2, 30);
   textSize(20);
   fill('black');
   text("P1",30, 45);
   text("P2",540, 45);
+  textSize(50);
+  text("HP", 270, 70)
+
+  //player
 }

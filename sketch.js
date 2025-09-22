@@ -1,7 +1,14 @@
 // Project Title Street fighter
 // Your Name(s) Jayson, Nathan
 // Date 9/19/25
-//
+
+//Variables
+let pX;
+let pY;
+let eX;
+let eY;
+let Score = 0;
+let health = 100;
 
 function setup() {
   //This function get run once at the start of the program

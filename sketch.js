@@ -3,33 +3,41 @@
 // Date 9/19/25
 
 //Variables
-let pX;
-let pY;
-let eX;
-let eY;
-let Score = 0;
-let health = 100;
-//let backDrop;
+//let p1X;
+//let p1Y;
+//let p2X;
+//let p2Y;
+let p1Health = 100;
+let p2Health = 100;
+let backDrop;
 
 function preload() {
-  //backDrop = loadImage('img/Background_level1.jpg');
-  //createImage('img/Background_level1.jpg');
+  backDrop = loadImage('img/Background_level1.jpg');
+  createImage('img/Background_level1.jpg');
   //soundFormats('mp3');
 }
 
 //This function get run once at the start of the program
 function setup() {
-  createCanvas(1800, 900);
+  createCanvas(600, 400);
   background(240);
-  // ellipseMode(CORNER);
+  rectMode(CORNER);
   ellipseMode(CENTER);
-  rectMode(CENTER);
-
-  //Set the number of frames per second
   frameRate(60);
 }
 
 function draw() {
   background(220);
-  //backDrop(100,200);
+  //backDrop(100, 200);
+  fill('black');
+  rect(30, 50, 200, 30);
+  rect(370, 50, 200, 30);
+  fill('red');
+  stroke('black');
+  rect(30, 50, p1Health * 2, 30);
+  rect(570, 50, p2Health * -2, 30);
+  textSize(20);
+  fill('black');
+  text("P1",30, 45);
+  text("P2",540, 45);
 }

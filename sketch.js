@@ -4,9 +4,9 @@
 
 //Variables
 let p1X = 50;
-let p1Y;
-let p2X;
-let p2Y;
+let p1Y = 200;
+let p2X = 550;
+let p2Y = 200;
 let p1Health = 100;
 let p2Health = 100;
 let backDrop;
@@ -29,28 +29,36 @@ function setup() {
 function draw() {
   background(220);
   //backDrop(100, 200);
-
+  rect (p1X, 200, 20, 40);
+  //rect (p2X, 200, 20, 40);
   //Health Bars
   fill('black');
-  rect(30, 50, 200, 30);
-  rect(370, 50, 200, 30);
+  rect (30, 50, 200, 30);
+  rect (370, 50, 200, 30);
   fill('red');
   stroke('black');
-  //health bars
-  rect(230, 50, p1Health * -2, 30);
-  rect(370, 50, p2Health * 2, 30);
+  rect (230, 50, p1Health * -2, 30);
+  rect (370, 50, p2Health * 2, 30);
   textSize(20);
   fill('black');
   text("P1",30, 45);
   text("P2",540, 45);
   textSize(50);
-  text("HP", 270, 70)
+  text("HP", 270, 70);
 
-  //player movement
-  if (ButtonDown(68)) {
+  //Player movement
+  if(keyIsDown(68)){
     p1X += 5;
   }
-  if (ButtonDown(65)) {
+  if(keyIsDown(65)){
     p1X -= 5;
   }
+   if(KeyIsDown(37)) {
+   p2X += 5;
+  }
+  if(KeyIsDown(39)) {
+   p2X -= 5;
+  }
+
+
 }

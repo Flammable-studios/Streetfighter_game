@@ -9,10 +9,16 @@ let eX;
 let eY;
 let Score = 0;
 let health = 100;
-let 
+//let backDrop;
 
+function preload() {
+  //backDrop = loadImage('img/Background_level1.jpg');
+  //createImage('img/Background_level1.jpg');
+  //soundFormats('mp3');
+}
+
+//This function get run once at the start of the program
 function setup() {
-  //This function get run once at the start of the program
   createCanvas(1800, 900);
   background(240);
   // ellipseMode(CORNER);
@@ -20,9 +26,10 @@ function setup() {
   rectMode(CENTER);
 
   //Set the number of frames per second
-  frameRate(30);
+  frameRate(60);
 }
 
 function draw() {
   background(220);
+  //backDrop(100,200);
 }

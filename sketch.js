@@ -10,10 +10,18 @@ let p2Y = 290;
 let p1Health = 100;
 let p2Health = 100;
 let backDrop;
+let p1Idle = true;
+let p2Idle = true;
+let p1Punch = false;
+let p2Punch = false;
+let p1Kick = false;
+let p2Kick = false;
+let p1Block = false;
+let p2Block = false;
 
 
 function preload() {
-  backDrop = loadImage('Background_level1.jpg');
+  //backDrop = loadImage('Background_level1.jpg');
   
   //soundFormats('mp3');
 }
@@ -29,8 +37,7 @@ function setup() {
 
 function draw() {
   background(220);
-  image(backDrop, 0, 0, 600, 400);
-
+  //image(backDrop, 0, 0, 600, 400);
   rect(p1X, p1Y, 20, 40);
   fill('red');
   rect(p2X, p2Y, 20, 40);
@@ -63,7 +70,7 @@ function draw() {
     p2X += 5;
   }
 
-  if (p1X > p2X - 10) {
+  if (p1X > p2X - 20) {
     p1X -= 10;
     p2X += 10;
   }
@@ -74,7 +81,92 @@ function draw() {
   if (p2X < 0) { p2X = 0; }
   if (p2X > 580) { p2X = 580; }
 
-  function p1Punch() {
-
+  if (p1Punch === true) {
+    rect(p1X + 20, p1Y + 10, 10, 2.5);
+  }
+  if (p1Kick === true) {
+    rect(p1X + 20, p1Y + 25, 10, 2.5);
+  }
+  if (p1Block === true) {
+    rect(p1X + 20, p1Y + 15, 10, 2.5);
+    rect(p1X + 27.5, p1Y + 5, 2.5, 10);
+  }
+  if (p1Idle === true) {
+    rect(p1X + 20, p1Y + 15, 10, 2.5);
+    rect(p1X + 27.5, p1Y + 10, 2.5, 5);
+  }
+  fill('red');
+  if (p2Punch === true) {
+    rect(p2X - 10, p2Y + 10, 10, 2.5);
+  }
+  if (p2Kick === true) {
+    rect(p2X - 10, p2Y + 25, 10, 2.5);
+  }
+  if (p2Block === true) {
+    rect(p2X - 10, p2Y + 15, 10, 2.5);
+    rect(p2X - 10, p2Y + 5, 2.5, 10);
+  }
+  if (p2Idle === true) {
+    rect(p2X - 10, p2Y + 15, 10, 2.5);
+    rect(p2X - 10, p2Y + 10, 2.5, 5);
+  }
+  fill('black');
+  //p1 punch
+  if (keyIsDown(69)) {
+    p1Idle = false;
+    p1Punch = true;
+  }
+  //p1 kick
+  if (keyIsDown(82)) {
+    p1Idle = false;
+    p1Kick = true;
+  }
+  //p1 block
+  if (keyIsDown(81)) {
+    p1Idle = false;
+    p1Block = true;
+  }
+  
+  //p2 punch
+  if (keyIsDown(45)) {
+    p2Idle = false;
+    p2Puncjh = true;
+  }
+  //p2 kick
+  if (keyIsDown(38)) {
+    p2Idle = false;
+    p2Kick = true;
+  }
+  //p2 block
+  if (keyIsDown(17)) {
+    p2Idle = false;
+    p2Block = true;
+  }
+  
+  //Reseting stuff
+  if (p1Idle === false) {
+    p1Idle = true
+  }
+  if (p1Punch === true) {
+    p1Punch = false
+  }
+  if (p1Kick === true) {
+    p1Kick = false
+  }
+  if (p1Block === true) {
+    p1Block = false
+  }
+  
+  if (p2Idle === false) {
+    p2Idle = true
+  }
+  if (p2Punch === true) {
+    p2Punch = false
+  }
+  if (p2Kick === true) {
+    p2Kick = false
+  }
+  if (p2Block === true) {
+    p2Block = false
   }
 }

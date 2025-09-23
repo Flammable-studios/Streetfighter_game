@@ -11,8 +11,10 @@ let p1Health = 100;
 let p2Health = 100;
 let backDrop;
 
+
 function preload() {
   backDrop = loadImage('Background_level1.jpg');
+  
   //soundFormats('mp3');
 }
 
@@ -28,6 +30,7 @@ function setup() {
 function draw() {
   background(220);
   image(backDrop, 0, 0, 600, 400);
+
   rect(p1X, p1Y, 20, 40);
   fill('red');
   rect(p2X, p2Y, 20, 40);
@@ -70,4 +73,8 @@ function draw() {
   if (p1X > 580) { p1X = 580; }
   if (p2X < 0) { p2X = 0; }
   if (p2X > 580) { p2X = 580; }
+
+  function p1Punch() {
+
+  }
 }

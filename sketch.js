@@ -18,11 +18,15 @@ let p1Kick = false;
 let p2Kick = false;
 let p1Block = false;
 let p2Block = false;
+let p1PunchCooldown = false;
+let p2PunchCooldown = false;
+let p1KickCooldown = false;
+let p2KickCooldown = false;
 
 
 function preload() {
   backDrop = loadImage('Background_level1.jpg');
-  
+
   //soundFormats('mp3');
 }
 
@@ -38,6 +42,7 @@ function setup() {
 function draw() {
   background(220);
   image(backDrop, 0, 0, 600, 400);
+  fill('blue');
   rect(p1X, p1Y, 20, 40);
   fill('red');
   rect(p2X, p2Y, 20, 40);
@@ -60,12 +65,15 @@ function draw() {
   if (keyIsDown(68)) {
     p1X += 5;
   }
+
   if (keyIsDown(65)) {
     p1X -= 5;
   }
+
   if (keyIsDown(37)) {
     p2X -= 5;
   }
+
   if (keyIsDown(39)) {
     p2X += 5;
   }
@@ -80,93 +88,182 @@ function draw() {
   if (p1X > 580) { p1X = 580; }
   if (p2X < 0) { p2X = 0; }
   if (p2X > 580) { p2X = 580; }
+  //player actions
+  fill('blue');
 
   if (p1Punch === true) {
-    rect(p1X + 20, p1Y + 10, 10, 2.5);
+    rect(p1X + 20, p1Y + 10, 15, 2.5);
   }
+
   if (p1Kick === true) {
-    rect(p1X + 20, p1Y + 25, 10, 2.5);
+    rect(p1X + 20, p1Y + 25, 15, 2.5);
   }
+
   if (p1Block === true) {
-    rect(p1X + 20, p1Y + 15, 10, 2.5);
-    rect(p1X + 27.5, p1Y + 5, 2.5, 10);
+    rect(p1X + 20, p1Y + 15, 15, 2.5);
+    rect(p1X + 32.5, p1Y + 5, 2.5, 10);
   }
+
   if (p1Idle === true) {
     rect(p1X + 20, p1Y + 15, 10, 2.5);
     rect(p1X + 27.5, p1Y + 10, 2.5, 5);
   }
+
   fill('red');
   if (p2Punch === true) {
-    rect(p2X - 10, p2Y + 10, 10, 2.5);
+    rect(p2X - 15, p2Y + 10, 15, 2.5);
   }
+
   if (p2Kick === true) {
-    rect(p2X - 10, p2Y + 25, 10, 2.5);
+    rect(p2X - 15, p2Y + 25, 15, 2.5);
   }
+
   if (p2Block === true) {
-    rect(p2X - 10, p2Y + 15, 10, 2.5);
-    rect(p2X - 10, p2Y + 5, 2.5, 10);
+    rect(p2X - 15, p2Y + 15, 15, 2.5);
+    rect(p2X - 15, p2Y + 5, 2.5, 10);
   }
+
   if (p2Idle === true) {
     rect(p2X - 10, p2Y + 15, 10, 2.5);
     rect(p2X - 10, p2Y + 10, 2.5, 5);
   }
+
   fill('black');
   //p1 punch
-  if (keyIsDown(69)) {
+  if (keyIsDown(69) && p1PunchCooldown == false) {
+    p1PunchCooldown = true;
     p1Idle = false;
     p1Punch = true;
+    setTimeout(() => {
+      p1PunchCooldown = false;
+    }, 500);
   }
+
   //p1 kick
-  if (keyIsDown(82)) {
+  if (keyIsDown(82) && p1KickCooldown == false) {
+    p1KickCooldown = true;
+    setTimeout(() => {
+      p1KickCooldown = false;
+    }, 500);
     p1Idle = false;
     p1Kick = true;
   }
+
   //p1 block
   if (keyIsDown(81)) {
     p1Idle = false;
     p1Block = true;
   }
-  
+
   //p2 punch
-  if (keyIsDown(45)) {
-    p2Idle = false;
-    p2Puncjh = true;
+  if (keyIsDown(45) && p2PunchCooldown) {
+    p2PunchCooldown = true;
+     p2Idle = false;
+    p2Punch = true;
+    setTimeout(() => {
+      p2PunchCooldown = false;
+    }, 500);
+   
   }
+
   //p2 kick
-  if (keyIsDown(38)) {
+  if (keyIsDown(38) && p2KickCooldown == false) {
+    p2KickCooldown = true;
+    setTimeout(() => {
+      p2KickCooldown = false;
+    }, 500);
     p2Idle = false;
     p2Kick = true;
   }
+
   //p2 block
   if (keyIsDown(17)) {
+
     p2Idle = false;
     p2Block = true;
   }
-  
+
   //Reseting stuff
   if (p1Idle === false) {
-    p1Idle = true
+    setTimeout(() => {
+      p1Idle = true;
+    }, 500);
   }
+
   if (p1Punch === true) {
-    p1Punch = false
+    setTimeout(() => {
+      p1Punch = false;
+    }, 500);
+    if (p2X < p1X + 75 && p2Block === true) {
+      p2Health -= 2.5;
+      p1Punch = false;
+      p1Idle = true;
+    } else if (p2X < p1X + 75 && p2Block === false) {
+      p2Health -= 5;
+      p1Punch = false;
+      p1Idle = true;
+    }
   }
+
   if (p1Kick === true) {
-    p1Kick = false
+    setTimeout(() => {
+      p1Kick = false;
+    }, 500);
+    if (p2X < p1X + 75 && p2Block === true) {
+      p2Health -= 5;
+      p1Kick = false;
+      p1Idle = true;
+    } else if (p2X < p1X + 75 && p2Block === false) {
+      p2Health -= 7.5;
+      p1Kick = false;
+      p1Idle = true;
+    }
   }
+
   if (p1Block === true) {
-    p1Block = false
+    setTimeout(() => {
+      p1Block = false;
+    }, 500);
   }
-  
+
   if (p2Idle === false) {
-    p2Idle = true
+    setTimeout(() => {
+      p2Idle = true;
+    }, 500);
   }
+
   if (p2Punch === true) {
-    p2Punch = false
+    setTimeout(() => {
+      p2Punch = false;
+    }, 500);
   }
+
   if (p2Kick === true) {
-    p2Kick = false
+    setTimeout(() => {
+      p2Kick = false;
+    }, 500);
   }
+
   if (p2Block === true) {
-    p2Block = false
+    setTimeout(() => {
+      p2Block = false;
+    }, 500);
+  }
+  if (p1Health <= 0) {
+    p1Health = 0;
+    background('lime');
+    textSize(100);
+    fill('black');
+    text("P2 WINS", 175, 200);
+    noLoop();
+  }
+
+  if (p2Health <= 0) {
+    p2Health = 0;
+    background('lime');
+    textSize(50);
+    fill('black');
+    text("P1 WINS", 175, 200);
+    noLoop();
   }
 }

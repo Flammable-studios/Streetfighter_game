@@ -8,8 +8,9 @@ let p1Y = 290;
 let p2X = 550;
 let p2Y = 290;
 let p1Health = 100;
-let p2Health = 100;
+let p2Health = 0;
 let backDrop;
+let EasterEgg;
 let p1Idle = true;
 let p2Idle = true;
 let p1Punch = false;
@@ -20,13 +21,14 @@ let p1Block = false;
 let p2Block = false;
 let p1AttackCooldown = false;
 let p2AttackCooldown = false;
+let textSizeVar = 32;
 
 
 
 function preload() {
   backDrop = loadImage('Background_level1.jpg');
-
-  //soundFormats('mp3');
+  soundFormats('mp4');
+  EasterEgg = loadVideo('OIIA.mp4');
 }
 
 //This function get run once at the start of the program
@@ -153,7 +155,7 @@ function draw() {
   }
 
   //p2 punch
-  if (keyIsDown(45) && p2AttackCooldown) {
+  if (keyIsDown(45) && p2AttackCooldown == false) {
     p2AttackCooldown = true;
     p2Idle = false;
     p2Punch = true;
@@ -232,15 +234,15 @@ function draw() {
     }, 500);
   }
 
-  if (p2Punch === true) {
+ if (p2Punch === true) {
     setTimeout(() => {
       p2Punch = false;
     }, 500);
-    if (p1X > p2X - 75 && p1Block === true) {
+    if (p2X < p1X + 75 && p1Block === true) {
       p1Health -= 2.5;
       p2Punch = false;
       p2Idle = true;
-    } else if (p1X > p2X - 75 && p1Block === false) {
+    } else if (p2X < p1X + 75 && p1Block === false) {
       p1Health -= 5;
       p2Punch = false;
       p2Idle = true;
@@ -276,10 +278,14 @@ function draw() {
     noLoop();
   }
 
+  // while (p1Health <= 0 || p2Health <= 0) {
+  //   textSizeVar += 5;
+  // }
+
   if (p2Health <= 0) {
     p2Health = 0;
     background('lime');
-    textSize(50);
+    textSize(textSizeVar);
     fill('black');
     text("P1 WINS", 175, 200);
     noLoop();
@@ -289,8 +295,11 @@ function draw() {
     background('white');
     fill('black');
     textSize(50);
-    text("OIIA OIIA OIIA OIIA OIIA", 20, 300);
+    text("OIIA OIIA OIIA OIIA OIIA", 20, 350);
+    EasterEgg.play();
+    noLoop();
   }
+  //Function to draw players
   function drawPlayers(w, h) {
     // Draw Player 1
     fill('blue');

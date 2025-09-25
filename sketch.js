@@ -234,7 +234,7 @@ function draw() {
     }, 500);
   }
 
- if (p2Punch === true) {
+  if (p2Punch === true) {
     setTimeout(() => {
       p2Punch = false;
     }, 500);

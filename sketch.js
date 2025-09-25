@@ -26,9 +26,9 @@ let loopTime = true;
 
 
 function preload() {
-  //backDrop = loadImage('Background_level1.jpg');
+  backDrop = loadImage('Background_level1.jpg');
   soundFormats('mp4');
-  //EasterEgg = loadVideo('OIIA.mp4');
+  EasterEgg = loadVideo('OIIA.mp4');
 }
 
 //This function get run once at the start of the program
@@ -42,7 +42,7 @@ function setup() {
 
 function draw() {
   background(220);
-  //image(backDrop, 0, 0, 600, 400);
+  image(backDrop, 0, 0, 600, 400);
   //players
   drawPlayers(20, 40);
   //Health Bars

@@ -18,10 +18,9 @@ let p1Kick = false;
 let p2Kick = false;
 let p1Block = false;
 let p2Block = false;
-let p1PunchCooldown = false;
-let p2PunchCooldown = false;
-let p1KickCooldown = false;
-let p2KickCooldown = false;
+let p1AttackCooldown = false;
+let p2AttackCooldown = false;
+
 
 
 function preload() {
@@ -42,10 +41,8 @@ function setup() {
 function draw() {
   background(220);
   image(backDrop, 0, 0, 600, 400);
-  fill('blue');
-  rect(p1X, p1Y, 20, 40);
-  fill('red');
-  rect(p2X, p2Y, 20, 40);
+  //players
+  drawPlayers(20, 40);
   //Health Bars
   fill('black');
   rect(30, 50, 200, 30);
@@ -109,7 +106,7 @@ function draw() {
     rect(p1X + 27.5, p1Y + 10, 2.5, 5);
   }
 
-  fill('red');
+  fill('lime');
   if (p2Punch === true) {
     rect(p2X - 15, p2Y + 10, 15, 2.5);
   }
@@ -130,21 +127,21 @@ function draw() {
 
   fill('black');
   //p1 punch
-  if (keyIsDown(69) && p1PunchCooldown == false) {
-    p1PunchCooldown = true;
+  if (keyIsDown(69) && p1AttackCooldown == false) {
+    p1AttackCooldown = true;
     p1Idle = false;
     p1Punch = true;
     setTimeout(() => {
-      p1PunchCooldown = false;
+      p1AttackCooldown = false;
     }, 500);
   }
 
   //p1 kick
-  if (keyIsDown(82) && p1KickCooldown == false) {
-    p1KickCooldown = true;
+  if (keyIsDown(82) && p1AttackCooldown == false) {
+    p1AttackCooldown = true;
     setTimeout(() => {
-      p1KickCooldown = false;
-    }, 500);
+      p1AttackCooldown = false;
+    }, 800);
     p1Idle = false;
     p1Kick = true;
   }
@@ -156,29 +153,32 @@ function draw() {
   }
 
   //p2 punch
-  if (keyIsDown(45) && p2PunchCooldown) {
-    p2PunchCooldown = true;
-     p2Idle = false;
+  if (keyIsDown(45) && p2AttackCooldown) {
+    p2AttackCooldown = true;
+    p2Idle = false;
     p2Punch = true;
     setTimeout(() => {
-      p2PunchCooldown = false;
+      p2AttackCooldown = false;
     }, 500);
-   
+
   }
 
   //p2 kick
-  if (keyIsDown(38) && p2KickCooldown == false) {
-    p2KickCooldown = true;
+  if (keyIsDown(38) && p2AttackCooldown == false) {
+    p2AttackCooldown = true;
     setTimeout(() => {
-      p2KickCooldown = false;
-    }, 500);
+      p2AttackCooldown = false;
+    }, 800);
     p2Idle = false;
     p2Kick = true;
   }
 
   //p2 block
-  if (keyIsDown(17)) {
-
+  if (keyIsDown(40) && p2AttackCooldown == false) {
+    p2AttackCooldown = true;
+    setTimeout(() => {
+      p2AttackCooldown = false;
+    }, 800);
     p2Idle = false;
     p2Block = true;
   }
@@ -236,12 +236,30 @@ function draw() {
     setTimeout(() => {
       p2Punch = false;
     }, 500);
+    if (p1X > p2X - 75 && p1Block === true) {
+      p1Health -= 2.5;
+      p2Punch = false;
+      p2Idle = true;
+    } else if (p1X > p2X - 75 && p1Block === false) {
+      p1Health -= 5;
+      p2Punch = false;
+      p2Idle = true;
+    }
   }
 
   if (p2Kick === true) {
     setTimeout(() => {
       p2Kick = false;
     }, 500);
+    if (p1X > p2X - 75 && p1Block === true) {
+      p1Health -= 5;
+      p2Kick = false;
+      p2Idle = true;
+    } else if (p1X > p2X - 75 && p1Block === false) {
+      p1Health -= 7.5;
+      p2Kick = false;
+      p2Idle = true;
+    }
   }
 
   if (p2Block === true) {
@@ -265,5 +283,21 @@ function draw() {
     fill('black');
     text("P1 WINS", 175, 200);
     noLoop();
+  }
+
+  if (p1Health <= 0 && p2Health <= 0) {
+    background('white');
+    fill('black');
+    textSize(50);
+    text("OIIA OIIA OIIA OIIA OIIA", 20, 300);
+  }
+  function drawPlayers(w, h) {
+    // Draw Player 1
+    fill('blue');
+    rect(p1X, p1Y, w, h);
+
+    // Draw Player 2
+    fill('lime');
+    rect(p2X, p2Y, w, h);
   }
 }

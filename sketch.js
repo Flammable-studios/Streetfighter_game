@@ -8,7 +8,7 @@ let p1Y = 290;
 let p2X = 550;
 let p2Y = 290;
 let p1Health = 100;
-let p2Health = 0;
+let p2Health = 100;
 let backDrop;
 let EasterEgg;
 let p1Idle = true;
@@ -22,13 +22,13 @@ let p2Block = false;
 let p1AttackCooldown = false;
 let p2AttackCooldown = false;
 let textSizeVar = 32;
-
+let loopTime = true;
 
 
 function preload() {
-  backDrop = loadImage('Background_level1.jpg');
+  //backDrop = loadImage('Background_level1.jpg');
   soundFormats('mp4');
-  EasterEgg = loadVideo('OIIA.mp4');
+  //EasterEgg = loadVideo('OIIA.mp4');
 }
 
 //This function get run once at the start of the program
@@ -42,7 +42,7 @@ function setup() {
 
 function draw() {
   background(220);
-  image(backDrop, 0, 0, 600, 400);
+  //image(backDrop, 0, 0, 600, 400);
   //players
   drawPlayers(20, 40);
   //Health Bars
@@ -278,9 +278,9 @@ function draw() {
     noLoop();
   }
 
-  // while (p1Health <= 0 || p2Health <= 0) {
-  //   textSizeVar += 5;
-  // }
+  while (p1Health <= 0 && loopTime === true || p2Health <= 0 && loopTime === true) {
+    textSizeVar += 5;
+  }
 
   if (p2Health <= 0) {
     p2Health = 0;
@@ -299,6 +299,9 @@ function draw() {
     EasterEgg.play();
     noLoop();
   }
+  
+  loopTime = false;
+  
   //Function to draw players
   function drawPlayers(w, h) {
     // Draw Player 1

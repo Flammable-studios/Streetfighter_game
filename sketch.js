@@ -20,6 +20,10 @@ let p1Block = false;
 let p2Block = false;
 let p1AttackCooldown = false;
 let p2AttackCooldown = false;
+let i = 0;
+let textSizeVar = 100;
+let winner;
+
 
 
 function preload() {
@@ -264,24 +268,30 @@ function draw() {
       p2Block = false;
     }, 500);
   }
+
+  //Win Conditions
   if (p1Health <= 0) {
-    p1Health = 0;
     background('lime');
-    textSize(100);
-    fill('black');
-    text("P2 WINS", 175, 200);
-    noLoop();
+    p1Health = 0;
+    winner = 2;
+  } else if (p2Health <= 0) {
+    background('lime');
+    p2Health = 0;
+    winner = 1;
   }
 
-  if (p2Health <= 0) {
-    p2Health = 0;
-    background('lime');
-    textSize(100);
-    fill('black');
-    text("P1 WINS", 175, 200);
-    noLoop();
+  while (i < 1000 && (p1Health <= 0 || p2Health <= 0)) {
+  if (winner === 1) {
+    text("Player 1 Wins!", 175, 200);
+  } else if (winner === 2){
+    text("Player 2 Wins!", 175, 200)
   }
-  
+   textSizeVar += 1;
+   backrgound('lime');
+   fill('black');
+   i++;
+  }
+
   //Function to draw players
   function drawPlayers(w, h) {
     // Draw Player 1
